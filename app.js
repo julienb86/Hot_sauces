@@ -2,23 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const userRoutes = require('./routes/user');
 
 const app = express();
-
-mongoose.connect('mongodb+srv://julien:7KyvgNH20VoZqf2G@cluster0-psxly.mongodb.net/test?retryWrites=true')
-    .then(
-        () => {
-            console.log("Successfully connected to MongoDB Atlas!");         
-        }
-    ).catch(
-        (error) => {
-            console.log("Unable to connect to MongoDB Atlas!");
-            console.error(error);
-        }
-    );
-
-
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -27,10 +12,18 @@ app.use((req, res, next) => {
     next();
   });
 
-
 app.use(bodyParser.json());
 
-app.use('/api/auth', userRoutes);
+mongoose.connect('mongodb+srv://julien:7KyvgNH20VoZqf2G@cluster0-psxly.mongodb.net/test?retryWrites=true')
+.then(() => {
+        console.log('Sucessfully connected to MongoDB Atlas!');
+    })
+    .catch((error) => {
+        console.log('Unable to connect to MongoDB Atlas!');
+        console.log(error); 
+    });
+
 
 
 module.exports = app;
+
