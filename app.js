@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-
 const app = express();
+
+const userRoutes = require('./routes/user');
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -23,6 +24,7 @@ mongoose.connect('mongodb+srv://julien:7KyvgNH20VoZqf2G@cluster0-psxly.mongodb.n
         console.log(error); 
     });
 
+app.use('/api/auth', userRoutes);
 
 
 module.exports = app;
