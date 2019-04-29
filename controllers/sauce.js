@@ -9,8 +9,12 @@ exports.createSauce = (req, res, next) => {
         manufacturer: req.body.sauce.manufacturer,
         description: req.body.sauce.description,
         mainPepper: req.body.sauce.mainPepper,
-        imageUrl: url + req.file.filename,
+        imageUrl: url + "/images/" + req.file.filename,
         heat: req.body.sauce.heat,
+        likes: 0,
+        dislikes: 0,
+        usersLiked: [],
+        usersDisliked: [],
     });
     sauces.save().then(
         () => {
@@ -22,6 +26,20 @@ exports.createSauce = (req, res, next) => {
         (error) => {
             res.status(400).json({
                 error : error
+            });
+        }
+    );
+}
+
+exports.getAllSauces = (req, res, next) => {
+    Sauce.find().then(
+        (sauces) => {
+            res.status(200).json(sauces);
+        }
+    ).catch(
+        (error) => {
+            res.status(400).json({
+                error: error
             });
         }
     );
