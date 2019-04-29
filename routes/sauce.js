@@ -4,10 +4,11 @@ const auth = require('../middleware/auth');
 
 const sauceCtrl = require('../controllers/sauce');
 
-
 const multer = require('../middleware/multer-config');
 /* need to add auth below */
-router.post('/sauces',multer, sauceCtrl.createSauce);
-router.get('/sauces', multer, sauceCtrl.getAllSauces);
+router.post('/',multer, sauceCtrl.createSauce);
+router.get('/', sauceCtrl.getAllSauces);
+router.get('/:id', sauceCtrl.getOneSauce);
+router.put('/:id', multer, sauceCtrl.modifySauce);
 
 module.exports = router;
