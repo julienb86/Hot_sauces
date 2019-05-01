@@ -137,9 +137,9 @@ exports.likes = (req, res, next) => {
                     );
 
                 }else {
-                    res.status(401).json(
+                    res.status(400).json(
                         (error) => {
-                            error : new Error("User has already liked the sauce")
+                            error : error
                         }
                     );
                 }
@@ -161,7 +161,7 @@ exports.likes = (req, res, next) => {
                         }
                     ).catch (
                         (error) => {
-                            res.status(401).json({
+                            res.status(400).json({
                                 error : error
                             });
                         }
@@ -201,14 +201,14 @@ exports.likes = (req, res, next) => {
                         }
                     ).catch(
                         (error) => {
-                            res.status(401).json({
+                            res.status(400).json({
                                 error : error
                             });
                         }
                     );
                 } else {
                     res.status(400).json({
-                        error : new Error("Request not valid")
+                        error : error
                     });
                 }
 
