@@ -4,7 +4,9 @@
 
 **Clone the repo.**
 
- run **npm install** from within the project root.
+ run **npm install** from within the project root then run **nodemon serve** or **node serve**
+ 
+ 
 
 
 # Technicals requirements
